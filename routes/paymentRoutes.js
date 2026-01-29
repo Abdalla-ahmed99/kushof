@@ -8,6 +8,7 @@ const {
 
 router.post('/checkout', createCheckoutSession);
 router.post('/callback', handleCallback);
+router.get('/callback', handleCallback);
 router.get('/success', showSuccessPage);
 
 module.exports = router;
