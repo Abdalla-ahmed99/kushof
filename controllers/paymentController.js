@@ -148,6 +148,14 @@ return: `${BASE_URL}/api/payment/success`
         ship.ip || req.ip || ''
       ];
       const urls = [paymentData.callback, paymentData.return];
+    console.log('PayTabs Payload:', {
+  payment_code,
+  transaction,
+  cart,
+  customer,
+  shipping,
+  urls
+});
 
     paytabs.createPaymentPage(payment_code, transaction, cart, customer, shipping, urls, paymentData.paypage_lang, (result) => {
       if (!result) {
