@@ -58,10 +58,26 @@ app.use(errorHandler);
 // Database Connection & Server Start
 const PORT = process.env.PORT || 3000;
 
-sequelize.sync()
-  .then(() => {
-    console.log('Database synced');
-  })
-  .catch(err => {
-    console.error('Sync error:', err);
-  });
+async function startServer() {
+  try {
+    await sequelize.authenticate();
+    console.log('Database connected');
+
+    // ❌ ممنوع sync في production
+    if (process.env.NODE_ENV !== 'production') {
+      await sequelize.sync({ alter: true });
+      console.log('Database synced (dev)');
+    }
+
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+
+  } catch (error) {
+    console.error('Failed to start server:', error);
+    process.exit(1);
+  }
+}
+
+startServer();
+
