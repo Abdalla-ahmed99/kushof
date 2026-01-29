@@ -3,9 +3,9 @@ const User = require('../models/User');
 require('dotenv').config();
 
 // Configuration
-const profileID = process.env.PAYTABS_PROFILE_ID || '148198';
+const profileID = process.env.PAYTABS_PROFILE_ID ;
 const serverKey = process.env.PAYTABS_SERVER_KEY ;
-const region = process.env.PAYTABS_REGION || 'EGY';
+const region = process.env.PAYTABS_REGION ;
 
 paytabs.setConfig(profileID, serverKey, region);
 
