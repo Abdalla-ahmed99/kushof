@@ -58,20 +58,10 @@ app.use(errorHandler);
 // Database Connection & Server Start
 const PORT = process.env.PORT || 3000;
 
-const startServer = async () => {
-  try {
-    await testConnection();
-    // Sync database (alter: true updates tables without dropping them)
-    await sequelize.sync({ alter: true });
-    console.log('Database synced successfully');
-
-    app.listen(PORT, () => {
-      console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
-    });
-  } catch (error) {
-    console.error('Failed to start server:', error);
-    process.exit(1);
-  }
-};
-
-startServer();
+sequelize.sync()
+  .then(() => {
+    console.log('Database synced');
+  })
+  .catch(err => {
+    console.error('Sync error:', err);
+  });
