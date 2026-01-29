@@ -4,7 +4,7 @@ require('dotenv').config();
 
 // Configuration
 const profileID = process.env.PAYTABS_PROFILE_ID || '148198';
-const serverKey = process.env.PAYTABS_SERVER_KEY || 'SKJ9TBKRMW-JMDJZ2LHHT-N9MRZNRBBB';
+const serverKey = process.env.PAYTABS_SERVER_KEY ;
 const region = process.env.PAYTABS_REGION || 'EGY';
 
 paytabs.setConfig(profileID, serverKey, region);
@@ -120,7 +120,7 @@ return: `${BASE_URL}/api/payment/success`
     // Map data for PayTabs SDK
     const payment_code = Array.isArray(paymentData.payment_methods)
         ? paymentData.payment_methods
-        : (paymentData.payment_methods ? [paymentData.payment_methods] : ['card','mada']);
+        : (paymentData.payment_methods ? [paymentData.payment_methods] : ['card']);
       const transaction = [paymentData.tran_type || 'sale', paymentData.tran_class || 'ecom'];
       const cart = [paymentData.cart_id, paymentData.cart_currency, String(paymentData.cart_amount), paymentData.cart_description];
       const cust = paymentData.customer_details || {};
