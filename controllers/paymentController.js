@@ -91,7 +91,7 @@ const createCheckoutSession = (req, res) => {
         : 'SAR';
 
     const cartId = `premium-${userId || Date.now()}`;
-
+    const BASE_URL = process.env.BASE_URL;
     const paymentData = {
       profile_id: profileID,
       tran_type: 'sale',
@@ -107,8 +107,9 @@ const createCheckoutSession = (req, res) => {
       shipping_details: {
         name: name || 'Premium User',
       },
-      callback: callbackUrl || `${req.protocol}://${req.get('host')}/api/payment/callback`,
-      return: returnUrl || `${req.protocol}://${req.get('host')}/api/payment/success`
+  
+callback: `${BASE_URL}/api/payment/callback`,
+return: `${BASE_URL}/api/payment/success`
     };
 
     // Basic validation
